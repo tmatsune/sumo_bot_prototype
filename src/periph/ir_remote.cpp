@@ -109,7 +109,6 @@ IR_MESSSAGE get_message(){
     }
 
     enable_interrupt(INT0);
-
     return message;
 }
 

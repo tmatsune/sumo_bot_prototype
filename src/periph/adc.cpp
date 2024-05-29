@@ -15,7 +15,7 @@
             - Create typdef array that will store values of adc inputs, then create a volatile version of
                     this array that can be accessed by higher layer
 */
-
+   
 #define FRONT_LEFT_SENSOR A_ZERO
 #define FRONT_RIGHT_SENSOR A_ONE
 

@@ -14,7 +14,7 @@ static isr_function interrupt_functions[ISR_PIN_COUNT][1] = {
     [INTERRUPT_0] = {NULL},
     [INTERRUPT_1] = {NULL},
 };
-
+  
 uint8_t get_pin_port(Pin_Type pin){
     if(pin == ONE || pin == TWO || pin == THREE || pin == FOUR || pin == FIVE || pin == SIX || pin == SEVEN){ return 0; }
     else if(pin == EIGHT || pin == NINE || pin == TEN || pin == ELEVIN || pin == TWELVE || pin == THIRTEEN){ return 1; }

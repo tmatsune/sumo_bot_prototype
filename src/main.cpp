@@ -11,7 +11,8 @@
 
 #define LOX1_ADDRESS 0x30
 #define LOX2_ADDRESS 0x31
-int sensor1, sensor2;
+#define LOX3_ADDRESS 0x32
+int sensor1, sensor2, sensor3;
 
 // set the pins to shutdown
 #define SHT_LOX1 7
@@ -68,7 +69,6 @@ void read_dual_sensors()
   lox1.rangingTest(&measure1, false); // pass in 'true' to get debug data printout!
   lox2.rangingTest(&measure2, false); // pass in 'true' to get debug data printout!
 
-  // print sensor one reading
   Serial.print("1: ");
   if (measure1.RangeStatus != 4)
   { // if not out of range
@@ -76,23 +76,18 @@ void read_dual_sensors()
     Serial.print(sensor1);
     Serial.print("mm");
   }
-  else
-  {
+  else {
     Serial.print("Out of range");
   }
 
-  Serial.print(" ");
-
-  // print sensor two reading
-  Serial.print("2: ");
+  Serial.print(" 2: ");
   if (measure2.RangeStatus != 4)
   {
     sensor2 = measure2.RangeMilliMeter;
     Serial.print(sensor2);
     Serial.print("mm");
   }
-  else
-  {
+  else{
     Serial.print("Out of range");
   }
 
@@ -102,23 +97,67 @@ void read_dual_sensors()
 void setup()
 {
   Serial.begin(9600);
+
   Serial.println("init");
+
+  while (!Serial)
+  {
+    delay(1);
+  }
+
+  pinMode(SHT_LOX1, OUTPUT);
+  pinMode(SHT_LOX2, OUTPUT);
+
+  digitalWrite(SHT_LOX1, LOW);
+  digitalWrite(SHT_LOX2, LOW);
+
+  setID();
 
   pwm_init();
   ir_remote_init();
   line_sensors_init();
-  drive_set(DRIVE_DIR_FORWARD, DRIVE_SPEED_MAX);
 }
 
 void loop()
 {
 
-  delay(200);
+  read_dual_sensors();
+  get_lines();
+  IR_MESSSAGE message = get_message();
+  if (message == IR_MSG_0){
+    Serial.println("forward, fast");
+    drive_set(DRIVE_DIR_FORWARD, DRIVE_SPEED_FAST);
+  } else if (message == IR_MSG_1){
+    Serial.println("forward, fast");
+    drive_set(DRIVE_DIR_REVERSE, DRIVE_SPEED_FAST);
+  } 
+
+  delay(100);
+}
+
+
+
+
+
+/*
 
   get_lines();
-  //read_dual_sensors();
-  
-}
+  IR_MESSSAGE message = get_message();
+  switch(message){
+    case IR_MSG_0:
+      Serial.println("forward, fast");
+      drive_set(DRIVE_DIR_FORWARD, DRIVE_SPEED_FAST);
+      break;
+    case IR_MSG_1:
+      Serial.println("reverse forward");
+      drive_set(DRIVE_DIR_REVERSE, DRIVE_SPEED_FAST);
+      break;
+    default:
+      break;
+  }
+*/
+
+
 /*
 // address we will assign if dual sensor is present
 #define LOX1_ADDRESS 0x30
@@ -170,8 +209,7 @@ void setID()
   if (!lox2.begin(LOX2_ADDRESS))
   {
     Serial.println(F("Failed to boot second VL53L0X"));
-    while (1)
-      ;
+    while (1);
   }
 }
 

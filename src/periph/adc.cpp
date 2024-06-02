@@ -31,12 +31,7 @@ void adc_init() {
     ADCSRA = (1 << ADEN) | (1 << ADIE) | (1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0);
 
     ADMUX = (ADMUX & 0xF0) | FRONT_LEFT_SENSOR;
-
-    // test 4 & 5 lights 
-    pinMode(FOUR, OUTPUT);
-    digitalWrite(FOUR, LOW);
-    pinMode(FIVE, OUTPUT);
-    digitalWrite(FIVE, LOW);
+    
     start_conversion();
 };
 
@@ -46,7 +41,6 @@ void get_adc_input_values(adc_input_values vals){
     vals[0] = adc_values[0];
     vals[1] = adc_values[1];
 }
-
 
 ISR(ADC_vect){
     adc_values[current_channel] = ADC;

@@ -2,7 +2,7 @@
 #define ADC_H
 #include <Arduino.h>
 
-#define ADC_COUNT 2
+#define ADC_COUNT 4
 typedef int adc_input_values[ADC_COUNT];
 
 void adc_init(void);

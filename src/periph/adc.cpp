@@ -18,10 +18,12 @@
    
 #define FRONT_LEFT_SENSOR A_ZERO
 #define FRONT_RIGHT_SENSOR A_ONE
+#define BACK_LEFT_SENSOR A_TWO
+#define BACK_RIGHT_SENSOR A_THREE 
 
 volatile adc_input_values adc_values;
 int current_channel = 0;
-
+  
 void adc_init() {
     // REFS0 SETS REFERNCE VOLTAGE TO EXTERNAL CAPACITOR
     ADMUX = (1 << REFS0);
@@ -40,6 +42,8 @@ void start_conversion(void){ ADCSRA |= (1 << ADSC); }
 void get_adc_input_values(adc_input_values vals){
     vals[0] = adc_values[0];
     vals[1] = adc_values[1];
+    vals[2] = adc_values[2];
+    vals[3] = adc_values[3];
 }
 
 ISR(ADC_vect){

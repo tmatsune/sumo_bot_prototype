@@ -6,13 +6,13 @@ void queue_init(struct Queue* q, int max_size){
     q->max_size = max_size;
 }
 
-void queue_push(struct Queue* q, int val){
+void queue_push(struct Queue* q, Input input_data){
     if(q->size == q->max_size) {
         queue_pop(q);
         q->size--;
     }
     struct Node *new_node = (struct Node *)malloc(sizeof(struct Node));
-    new_node->val = val;
+    new_node->input_data = input_data;
     if(!q->root){
         q->root = new_node;
         q->top = new_node;
@@ -22,25 +22,28 @@ void queue_push(struct Queue* q, int val){
     }
     q->size++;
 }
-
-int queue_pop(struct Queue* q){
+   
+Input queue_pop(struct Queue* q){
+    Input input = {.enemy = {.enemy_location = ENEMY_LOC_NONE, .enemy_range = ENEMY_RANGE_NONE}};
     if(q->root){
-        int res = q->root->val;
+        Input res = q->root->input_data;
         struct Node* next_root = q->root->next;
         q->root = next_root;
         q->size--;
         return res;
     }
-    return -1;
+    return input;
 }
 
-int queue_peek_root(struct Queue* q){
-    if(q->root) return q->root->val;
-    return -1;
+Input queue_peek_root(struct Queue* q){
+    Input input = {.enemy = {.enemy_location = ENEMY_LOC_NONE, .enemy_range = ENEMY_RANGE_NONE}};
+    if(q->root) input = q->root->input_data;
+    return input;
 }
-int queue_peek_top(struct Queue *q){
-    if(q->top) return q->top->val;
-    return -1;
+Input queue_peek_top(struct Queue *q){
+    Input input = {.enemy = {.enemy_location=  ENEMY_LOC_NONE, .enemy_range = ENEMY_RANGE_NONE}};
+    if(q->top) return q->top->input_data;
+    return input;
 }
 
 bool queue_empty(struct Queue* q){

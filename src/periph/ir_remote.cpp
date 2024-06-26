@@ -65,7 +65,7 @@ static void isr_pulse(){
         ir_message.raw += (timer_ms >= 2) ? 1 : 0; // IF TIMER BETWEEN PULSES IS > 2 THEN 1 SHOULD BE ADDED ELSE 0
     }
     if(is_message_pulse(pulse_count)){
-        queue_push(remote_messages, ir_message.decoded.cmd);
+        //queue_push(remote_messages, ir_message.decoded.cmd);
     }
 
     ir_start_timer();
@@ -91,7 +91,7 @@ IR_MESSSAGE get_message(){
     IR_MESSSAGE message = IR_MSG_NONE;
 
     if(!queue_empty(remote_messages)){
-        int decoded_message = queue_pop(remote_messages);
+        int decoded_message = 0; //queue_pop(remote_messages);
         switch (decoded_message)
         {
         case IR_MSG_0:
@@ -104,6 +104,7 @@ IR_MESSSAGE get_message(){
             message = IR_MSG_2;
             break;
         default:
+            message = IR_MSG_NONE;
             break;
         }
     }

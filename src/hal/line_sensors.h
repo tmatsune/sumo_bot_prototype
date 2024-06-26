@@ -5,15 +5,22 @@
 #include <Arduino.h>
 #include "periph/adc.h"
 
-struct Line_Data {
-    int fron_right;
-    int front_left;
-    int back_right;
-    int back_left;
-};
+typedef enum {
+    LINE_NONE,
+    LINE_FRONT,
+    LINE_BACK,
+    LINE_LEFT,
+    LINE_RIGHT,
+    LINE_FRONT_LEFT,
+    LINE_FRONT_RIGHT,
+    LINE_BACK_LEFT,
+    LINE_BACK_RIGHT,
+    LINE_DIAGONAL_LEFT,
+    LINE_DIAGONAL_RIGHT
+} Line_Pos;
 
 void line_sensors_init(void);
-void get_lines();
-
+Line_Pos get_lines();
+const char *line_str(Line_Pos line);
 
 #endif

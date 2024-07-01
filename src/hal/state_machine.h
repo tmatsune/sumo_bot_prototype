@@ -9,6 +9,7 @@
 #include "hal/global_state_data.h"
 #include "hal/timer.h"
 #include "scripts/queue.h"
+#include "scripts/assert_script.h"
 
 typedef struct {
     State_Type from_state;
@@ -24,11 +25,14 @@ struct State_Machine{
     struct Retreat_State retreat_state;
     struct Wait_State wait_state;
     Event internal_event;
-    Timer timer;
+    Timer *timer;
     Queue input_histoty;
 };
 
-void state_machine_test_init(struct State_Machine *state_machine, Timer timer);
+void state_machine_init(struct State_Machine *state_machine, Timer *timer);
 void state_machine_run(struct State_Machine *state_machine, uint16_t *ranges);
+void post_internal_event(struct State_Machine *state_machine, Event event);
+
+
 
 #endif

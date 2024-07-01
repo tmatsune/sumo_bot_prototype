@@ -90,6 +90,7 @@ IR_MESSSAGE get_message(){
 
     IR_MESSSAGE message = IR_MSG_NONE;
 
+    /*
     if(!queue_empty(remote_messages)){
         int decoded_message = 0; //queue_pop(remote_messages);
         switch (decoded_message)
@@ -108,6 +109,7 @@ IR_MESSSAGE get_message(){
             break;
         }
     }
+    */
 
     enable_interrupt(INT0);
     return message;

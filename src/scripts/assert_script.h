@@ -4,6 +4,6 @@
 #include <Arduino.h>
 
 
-void assert(bool expression, char* err);
+void assert(bool expression, String err);
 
 #endif

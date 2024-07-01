@@ -21,6 +21,6 @@ typedef enum {
 
 void line_sensors_init(void);
 Line_Pos get_lines();
-const char *line_str(Line_Pos line);
+//const char *line_str(Line_Pos line);
 
 #endif

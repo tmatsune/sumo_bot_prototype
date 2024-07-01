@@ -31,12 +31,14 @@ void timer_tick(struct Timer* timer, uint32_t main_clock_time){
 }
 
 void timer_set_timeout(struct Timer* timer, uint32_t timeout){
+    timer->time = 0;
+    time = 0;
     timer->timeout = timeout;
 }
 
-bool timer_timed_out(const struct Timer timer){
-    if(timer.time > timer.timeout & timer.timeout > 0) reset_main_time();
-    return timer.time > timer.timeout & timer.timeout > 0;
+bool timer_timed_out(struct Timer *timer){
+    if(timer->time > timer->timeout & timer->timeout > 0) reset_main_time();
+    return timer->time > timer->timeout & timer->timeout > 0;
 }
 
 void timer_reset(struct Timer* timer){
@@ -44,6 +46,7 @@ void timer_reset(struct Timer* timer){
 }
 void timer_hard_reset(struct Timer* timer){
     timer->time = 0;
+    time = 0;
     timer->timeout = 0;
 }
 

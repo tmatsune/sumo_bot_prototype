@@ -29,12 +29,12 @@ typedef struct {
 Enemy get_enemy(uint16_t loc1, uint16_t loc2, uint16_t loc3);
 Enemy_Range get_enemy_range(uint16_t range);
 Enemy_Loc get_enemy_location(bool left, bool front, bool right);
-bool enemy_detected(Enemy* enemy);
-bool enemy_on_left(Enemy* enemy);
-bool enemy_on_right(Enemy* enemy);
-bool enemy_in_front(Enemy* enemy);
+bool enemy_detected(Enemy enemy);
+bool enemy_on_left(Enemy enemy);
+bool enemy_on_right(Enemy enemy);
+bool enemy_in_front(Enemy enemy);
 
-const char* enemy_loc_str(Enemy_Loc enemy_loc);
-const char *enemy_range_str(Enemy_Range enemy_range);
+//const char* enemy_loc_str(Enemy_Loc enemy_loc);
+//const char *enemy_range_str(Enemy_Range enemy_range);
 
 #endif

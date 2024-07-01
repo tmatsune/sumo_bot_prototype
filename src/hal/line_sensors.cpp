@@ -30,6 +30,7 @@ Line_Pos get_lines(){
     return LINE_NONE;
 }
 
+/*
 const char *line_str(Line_Pos line){
     switch(line){
         case LINE_NONE:
@@ -54,8 +55,10 @@ const char *line_str(Line_Pos line){
             return "LINE_DIAGONAL_LEFT";
         case LINE_DIAGONAL_RIGHT:
             return "LINE_DIAGONAL_RIGHT";
-        default: 
+        default:
             return "LINE_NONE";
     }
     return "LINE_NONE";
 }
+
+*/

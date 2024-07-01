@@ -5,12 +5,12 @@
 #include "hal/enemy.h"
 
 typedef enum {
+    EVENT_NONE,
     EVENT_TIMEOUT,
     EVENT_LINE,
-    EVENT_ENEMY, 
+    EVENT_ENEMY,
     EVENT_FINISHED,
     EVENT_COMMAND,
-    EVENT_NONE
 } Event;
 
 typedef enum {
@@ -32,5 +32,6 @@ struct Global_State_Data{
     Line_Pos line;
 };
 
+//void post_internal_event(struct State_Machine *state_machine, Event event);
 
 #endif

@@ -29,6 +29,5 @@ void queue_push(struct Queue* q, Input input_data);
 Input queue_pop(struct Queue* q);
 Input queue_peek_root(struct Queue *q);
 Input queue_peek_top(struct Queue *q);
-bool queue_empty(struct Queue* q);
-
+Enemy queue_last_enemy(struct Queue *q);
 #endif

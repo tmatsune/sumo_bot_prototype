@@ -33,11 +33,12 @@ void setup()
   i2c_init();
 
   init_timer();
+
+  state_machine_init(&state_machine, &timer);
+
   timer_set_timeout(&timer, 400);
 
-  state_machine_test_init(&state_machine, timer);
-
-  Serial.println("everything connected!");
+      Serial.println("everything connected!");
 }
 
 void loop()
@@ -54,6 +55,19 @@ void loop()
   Serial.println();
   delay(200);
 
+
+  uint32_t time1 = get_time();
+  timer_tick(&timer, time1);
+  Serial.print("Timer Time: ");
+  Serial.println(timer.time);
+  Serial.print("Timer Timeout: ");
+  Serial.println(timer.timeout);
+
+
+}
+
+
+/*
   if(test_mode){
 
     if (can_read_1){
@@ -78,8 +92,8 @@ void loop()
     Serial.print(" Enemy location: ");
     Serial.println(enemy.enemy_location);
   }
-  
-  //delay(200);
+
+
 
   IR_MESSSAGE message = IR_MSG_NONE; //get_message();
   if (message == IR_MSG_0){
@@ -92,26 +106,9 @@ void loop()
 
   }
 
-  Line_Pos line_pos = get_lines();
-  if(line_pos != LINE_NONE){
-    switch(line_pos){
-      case LINE_FRONT:
-        Serial.println("FRONT");
-        break;
-      case LINE_FRONT_LEFT:
-        Serial.println("FRONT_LEFT");
-        break;
-      case LINE_FRONT_RIGHT:
-        Serial.println("FRONT_RIGHT");
-        break;
-      default:
-        break;
-    }
-  }
-  
-  uint32_t time1 = get_time();
-  timer_tick(&timer, time1);
-  bool timed_out = timer_timed_out(timer);
+
+
+    bool timed_out = timer_timed_out(&timer);
   if(test_timer){
     Serial.println(timer.time);
     Serial.println(timer.timeout);
@@ -119,5 +116,4 @@ void loop()
     Serial.println();
   }
 
-
-}
+*/
